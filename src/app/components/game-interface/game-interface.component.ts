@@ -1,4 +1,4 @@
-import { Component, EventEmitter, HostListener, OnInit, Output } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-game-interface',
@@ -14,12 +14,16 @@ export class GameInterfaceComponent implements OnInit {
   cursorOfCells = this.initialState;
   //arreglo para guardar el camino del jugador
   playerOptions: number[] = [];
+  //arreglo para guardar los obstaculos
+  obstaclesGame: number[] = [];
+
 
   constructor() { }
 
   ngOnInit(): void {
+    this.obstaclesGame = [10, 16, 30];
+    this.playerOptions = [1, 2, 3];
     this.generateArray();
-
   }
 
   @HostListener('window:keydown', ['$event'])
@@ -43,10 +47,20 @@ export class GameInterfaceComponent implements OnInit {
   }
 
   generateArray() {
-
     for (let index = 0; index < 64; index++) {
       this.numOfCells.push(index);
     }
+  }
+
+
+  checkOptionPlayer(): boolean {
+    console.log(this.numOfCells.includes(5));
+    for (let indexPlayerOptions = 0; indexPlayerOptions < this.playerOptions.length; indexPlayerOptions++) {
+      if (this.numOfCells.includes(this.playerOptions[indexPlayerOptions])) {
+        return true;
+      }
+    }
+    return false;
   }
 
 }
