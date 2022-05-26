@@ -16,34 +16,15 @@ export class GameInterfaceComponent implements OnInit {
   playerOptions: number[] = [];
   //arreglo para guardar los obstaculos
   obstaclesGame: number[] = [];
+  //array de las posiciones que escoge el usuario
+  arrowsPlayerArray:string[] = [];
 
 
   constructor() { }
 
   ngOnInit(): void {
-    this.obstaclesGame = [10, 16, 30];
-    this.playerOptions = [1, 2, 3];
+    this.obstaclesGame = [10];
     this.generateArray();
-  }
-
-  @HostListener('window:keydown', ['$event'])
-  onKeyDown(event: KeyboardEvent) {
-
-    if (event.key == 'ArrowLeft') {
-      this.cursorOfCells -= 1;
-    }
-
-    if (event.key == 'ArrowRight') {
-      this.cursorOfCells += 1;
-    }
-
-    if (event.key == 'ArrowDown') {
-      this.cursorOfCells += 8;
-    }
-
-    if (event.key == 'ArrowUp') {
-      this.cursorOfCells -= 8;
-    }
   }
 
   generateArray() {
@@ -61,6 +42,35 @@ export class GameInterfaceComponent implements OnInit {
       }
     }
     return false;
+  }
+
+  setMovements(parameter: string): void {
+    if(parameter == 'up'){
+      this.playerOptions.push(this.cursorOfCells -= 8);
+      this.arrowsPlayerArray.push('arrow-selected bx bxs-up-arrow-square');
+    }
+    else if(parameter == 'left'){
+      this.playerOptions.push(this.cursorOfCells -= 1);
+      this.arrowsPlayerArray.push('arrow-selected bx bxs-left-arrow-square');
+    }
+    else if(parameter == 'down'){
+      this.playerOptions.push(this.cursorOfCells += 8);
+      this.arrowsPlayerArray.push('arrow-selected bx bxs-down-arrow-square');
+    }
+    else if(parameter == 'right'){
+      this.playerOptions.push(this.cursorOfCells += 1);
+      this.arrowsPlayerArray.push('arrow-selected bx bxs-right-arrow-square');
+    }
+    console.log(this.arrowsPlayerArray);
+  }
+
+  verificatePosition(): boolean{
+    return true;
+  }
+
+  start(): void{
+    this.playerOptions = [2,3,4,5];
+    console.log("entra");
   }
 
 }
