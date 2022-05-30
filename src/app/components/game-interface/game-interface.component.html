@@ -2,16 +2,16 @@
   <div class="main-array">
     <div class="cells" *ngFor="let item of numOfCells" [ngClass]="{
       'initial-state': initialState == item,
+      'goal': goal == item,
       'activate':playerOptions.includes(item),
       'obstacle': obstaclesGame.includes(item)
     }">
-      {{numOfCells[item]}}
     </div>
   </div>
 
   <div class="w-50 h-100 d-flex">
     <div class="w-50 h-100">
-      <div class="player-solution h-75">
+      <div class="player-solution">
         <i *ngFor="let item of arrowsPlayerArray" [ngClass]="item">
         </i>
       </div>
