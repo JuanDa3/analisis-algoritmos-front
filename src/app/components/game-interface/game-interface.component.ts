@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -23,6 +23,8 @@ export class GameInterfaceComponent implements OnInit {
   goal: number = 0;
   //indica el nivel en el que se encuentra
   level_counter: number;
+  //array temporal
+  temp_array: number[] = [];
 
 
   constructor() {
@@ -34,6 +36,7 @@ export class GameInterfaceComponent implements OnInit {
     this.generateArray();
   }
 
+
   generateArray() {
     for (let index = 0; index < 64; index++) {
       this.numOfCells.push(index);
@@ -42,7 +45,17 @@ export class GameInterfaceComponent implements OnInit {
   }
 
   //este metodo se usa para validar el movimiento del jugador
-  checkOptionPlayer(): boolean {
+  async checkOptionPlayer() {
+
+    for (let index = 0; index < this.temp_array.length; index++) {
+      this.cursorOfCells = this.temp_array[index];
+      this.validatePosition();
+      await this.delay(1500);
+      this.playerOptions.push(this.cursorOfCells);
+    }
+  }
+
+  validatePosition() {
     if (this.obstaclesGame.includes(this.cursorOfCells)) {
       Swal.fire({
         icon: 'error',
@@ -51,49 +64,46 @@ export class GameInterfaceComponent implements OnInit {
       })
       this.level_counter += 1;
       this.setLevels();
-    }
-    if (this.cursorOfCells == this.goal) {
+    } else if (this.cursorOfCells == this.goal) {
       Swal.fire({
         icon: 'success',
         title: 'Muy Bien',
-        text: 'Has pasado al siguiente nivel :)',
+        text: 'Has pasado al siguiente nivel',
       })
       this.level_counter += 1;
       this.setLevels();
     }
-    return true;
+  }
+
+  delay(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
   }
 
   setMovements(parameter: string): void {
     if (parameter == 'up') {
-      this.playerOptions.push(this.cursorOfCells -= 8);
-      if (this.checkOptionPlayer()) {
-        this.arrowsPlayerArray.push('arrow-selected bx bxs-up-arrow-square');
-      }
+      this.temp_array.push(this.cursorOfCells -= 8);
+      this.arrowsPlayerArray.push('arrow-selected bx bxs-up-arrow-square');
     }
     else if (parameter == 'left') {
-      this.playerOptions.push(this.cursorOfCells -= 1);
-      if (this.checkOptionPlayer()) {
-        this.arrowsPlayerArray.push('arrow-selected bx bxs-left-arrow-square');
-      }
+      this.temp_array.push(this.cursorOfCells -= 1);
+      this.arrowsPlayerArray.push('arrow-selected bx bxs-left-arrow-square');
     }
     else if (parameter == 'down') {
-      this.playerOptions.push(this.cursorOfCells += 8);
-      if (this.checkOptionPlayer()) {
-        this.arrowsPlayerArray.push('arrow-selected bx bxs-down-arrow-square');
-      }
+      this.temp_array.push(this.cursorOfCells += 8);
+      this.arrowsPlayerArray.push('arrow-selected bx bxs-down-arrow-square');
     }
     else if (parameter == 'right') {
-      this.playerOptions.push(this.cursorOfCells += 1);
-      if (this.checkOptionPlayer()) {
-        this.arrowsPlayerArray.push('arrow-selected bx bxs-right-arrow-square');
-      }
+      this.temp_array.push(this.cursorOfCells += 1);
+      this.arrowsPlayerArray.push('arrow-selected bx bxs-right-arrow-square');
     }
   }
 
   start(): void {
-    this.playerOptions = [2, 3, 4, 5];
-    console.log("entra");
+    this.checkOptionPlayer();
+  }
+
+  undoMovement() {
+    this.arrowsPlayerArray.pop();
   }
 
   async modal_welcome() {
@@ -113,6 +123,10 @@ export class GameInterfaceComponent implements OnInit {
   }
 
   setLevels() {
+    this.playerOptions = [];
+    this.arrowsPlayerArray = [];
+    this.temp_array = [];
+
     if (this.level_counter == 1) {
       this.initialState = 25;
       this.cursorOfCells = this.initialState;
@@ -124,33 +138,25 @@ export class GameInterfaceComponent implements OnInit {
       this.cursorOfCells = this.initialState;
       this.goal = 37;
       this.obstaclesGame = [16, 19, 22, 33, 52, 7, 48, 56, 0, 39, 63, 60, 12, 29];
-      this.playerOptions = [];
-      this.arrowsPlayerArray = [];
+      console.log(this.playerOptions);
     }
     if (this.level_counter == 3) {
       this.initialState = 54;
       this.cursorOfCells = this.initialState;
       this.goal = 32;
       this.obstaclesGame = [60, 52, 44, 36, 18, 26, 34, 10, 5, 13];
-      this.playerOptions = [];
-      this.arrowsPlayerArray = [];
     }
     if (this.level_counter == 4) {
       this.initialState = 9;
       this.cursorOfCells = this.initialState;
       this.goal = 32;
       this.obstaclesGame = [16, 17, 18, 26, 34, 27, 28, 36, 44, 38, 39, 60, 50, 48, 56, 6, 7, 13, 14, 54];
-      this.playerOptions = [];
-      this.arrowsPlayerArray = [];
     }
     if (this.level_counter == 5) {
       this.initialState = 34;
       this.cursorOfCells = this.initialState;
       this.goal = 37;
       this.obstaclesGame = [35, 36, 28, 27, 43, 51, 20, 12, 29, 30, 45, 46, 41, 42, 26, 25, 8, 9, 56, 57, 62, 63, 61, 6, 7, 2, 0, 1];
-      this.playerOptions = [];
-      this.arrowsPlayerArray = [];
     }
   }
-
 }
