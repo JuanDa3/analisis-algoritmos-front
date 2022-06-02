@@ -25,6 +25,10 @@ export class GameInterfaceComponent implements OnInit {
   level_counter: number;
   //array temporal
   temp_array: number[] = [];
+  //array para guardar la calificacion del usuario
+  calification: number[] = [];
+  //prueba
+  prueba: string = "prueba desde el componente de game interface";
 
 
   constructor() {
@@ -61,7 +65,8 @@ export class GameInterfaceComponent implements OnInit {
         icon: 'error',
         title: 'Oops...',
         text: 'Has caido en una trampa, Perdiste :(',
-      })
+      });
+      this.calification.push(0);
       this.level_counter += 1;
       this.setLevels();
     } else if (this.cursorOfCells == this.goal) {
@@ -69,7 +74,8 @@ export class GameInterfaceComponent implements OnInit {
         icon: 'success',
         title: 'Muy Bien',
         text: 'Has pasado al siguiente nivel',
-      })
+      });
+      this.calification.push(1);
       this.level_counter += 1;
       this.setLevels();
     }
