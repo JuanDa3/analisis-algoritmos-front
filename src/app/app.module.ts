@@ -9,7 +9,7 @@ import { InstructionsComponent } from './components/instructions/instructions.co
 import { QuizComponent } from './components/quiz/quiz.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { AdministratorComponent } from './components/administrator/administrator.component';
-
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -24,7 +24,12 @@ import { AdministratorComponent } from './components/administrator/administrator
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    RouterModule.forRoot([
+      { path: 'game-interface', component: GameInterfaceComponent },
+      { path: 'administrator', component: AdministratorComponent },
+      { path: '**', pathMatch: 'full', redirectTo: 'game-interface' }
+    ])
   ],
   providers: [],
   bootstrap: [AppComponent]

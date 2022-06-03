@@ -10,6 +10,7 @@ export class AdministratorComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    console.log("me llamaron?");
   }
 
 }

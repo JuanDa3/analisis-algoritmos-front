@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -28,11 +28,12 @@ export class GameInterfaceComponent implements OnInit {
   //array para guardar la calificacion del usuario
   calification: number[] = [];
   //prueba
-  prueba: string = "prueba desde el componente de game interface";
+  @Output() prueba: string = "prueba desde el componente de game interface";
 
 
   constructor() {
-    this.level_counter = 1;
+    this.level_counter = 5;
+    this.calification = [0, 1, 1, 1, 1];
   }
 
   ngOnInit(): void {

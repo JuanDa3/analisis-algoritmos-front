@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-instructions',
@@ -6,8 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./instructions.component.sass']
 })
 export class InstructionsComponent implements OnInit {
+  @Input() prueba: string;
 
-  constructor() { }
+  constructor() {
+    this.prueba = "";
+  }
 
   ngOnInit(): void {
   }

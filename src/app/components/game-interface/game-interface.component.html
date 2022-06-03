@@ -1,4 +1,8 @@
-<div class="main-container d-flex">
+<app-header></app-header>
+
+<app-instructions [prueba]="prueba"></app-instructions>
+
+<div class="mt-5 main-container d-flex">
   <div class="main-array">
     <div class="cells" *ngFor="let item of numOfCells" [ngClass]="{
       'initial-state': initialState == item,
@@ -31,4 +35,8 @@
       </div>
     </div>
   </div>
+</div>
+
+<div class="mt-5">
+  <app-footer></app-footer>
 </div>
