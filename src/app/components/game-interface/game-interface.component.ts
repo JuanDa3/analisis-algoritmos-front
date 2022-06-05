@@ -1,4 +1,5 @@
 import { Component, OnInit, Output } from '@angular/core';
+import { NavigationExtras, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -25,13 +26,14 @@ export class GameInterfaceComponent implements OnInit {
   level_counter: number;
   //array temporal
   temp_array: number[] = [];
+  //para pasar la calificacion a otro componente
   //array para guardar la calificacion del usuario
-  calification: number[] = [];
+  @Output() calification: number[] = [];
   //prueba
   @Output() prueba: string = "prueba desde el componente de game interface";
 
 
-  constructor() {
+  constructor(private router: Router) {
     this.level_counter = 5;
     this.calification = [0, 1, 1, 1, 1];
   }
@@ -69,6 +71,14 @@ export class GameInterfaceComponent implements OnInit {
       });
       this.calification.push(0);
       this.level_counter += 1;
+      if (this.level_counter > 5) {
+        const queryParams: any = {};
+        queryParams.myArray = JSON.stringify(this.calification);
+        const navigationExtras: NavigationExtras = {
+          queryParams
+        };
+        this.router.navigate(['/survey'], navigationExtras);
+      }
       this.setLevels();
     } else if (this.cursorOfCells == this.goal) {
       Swal.fire({
@@ -78,6 +88,9 @@ export class GameInterfaceComponent implements OnInit {
       });
       this.calification.push(1);
       this.level_counter += 1;
+      if (this.level_counter > 5) {
+        this.router.navigate(['/survey']);
+      }
       this.setLevels();
     }
   }

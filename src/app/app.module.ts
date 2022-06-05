@@ -6,10 +6,10 @@ import { AppComponent } from './app.component';
 import { GameInterfaceComponent } from './components/game-interface/game-interface.component';
 import { HeaderComponent } from './components/header/header.component';
 import { InstructionsComponent } from './components/instructions/instructions.component';
-import { QuizComponent } from './components/quiz/quiz.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { AdministratorComponent } from './components/administrator/administrator.component';
 import { RouterModule } from '@angular/router';
+import { SurveyComponent } from './components/survey/survey.component';
 
 
 @NgModule({
@@ -18,9 +18,9 @@ import { RouterModule } from '@angular/router';
     GameInterfaceComponent,
     HeaderComponent,
     InstructionsComponent,
-    QuizComponent,
     FooterComponent,
     AdministratorComponent,
+    SurveyComponent,
   ],
   imports: [
     BrowserModule,
@@ -28,6 +28,7 @@ import { RouterModule } from '@angular/router';
     RouterModule.forRoot([
       { path: 'game-interface', component: GameInterfaceComponent },
       { path: 'administrator', component: AdministratorComponent },
+      { path: 'survey', component: SurveyComponent },
       { path: '**', pathMatch: 'full', redirectTo: 'game-interface' }
     ])
   ],
