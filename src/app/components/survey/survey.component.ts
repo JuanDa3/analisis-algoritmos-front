@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-survey',
@@ -26,4 +27,19 @@ export class SurveyComponent implements OnInit {
     console.log(this.arrayOfValues);
   }
 
+  async modal_welcome() {
+    const { value: formValues } = await Swal.fire({
+      title: 'Ingrese su nombre',
+      html:
+        '<input id="swal-input1" class="swal2-input">',
+      focusConfirm: false,
+      preConfirm: () => {
+        "cualquier cosa"
+      }
+    })
+
+    if (formValues) {
+      Swal.fire(JSON.stringify(formValues))
+    }
+  }
 }

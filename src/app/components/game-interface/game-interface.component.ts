@@ -28,18 +28,15 @@ export class GameInterfaceComponent implements OnInit {
   temp_array: number[] = [];
   //para pasar la calificacion a otro componente
   //array para guardar la calificacion del usuario
-  @Output() calification: number[] = [];
-  //prueba
-  @Output() prueba: string = "prueba desde el componente de game interface";
+  @Output() calification: number[];
 
 
   constructor(private router: Router) {
-    this.level_counter = 5;
-    this.calification = [0, 1, 1, 1, 1];
+    this.level_counter = 1;
+    this.calification = [];
   }
 
   ngOnInit(): void {
-    //this.modal_welcome();
     this.generateArray();
   }
 
@@ -53,22 +50,17 @@ export class GameInterfaceComponent implements OnInit {
 
   //este metodo se usa para validar el movimiento del jugador
   async checkOptionPlayer() {
-
     for (let index = 0; index < this.temp_array.length; index++) {
       this.cursorOfCells = this.temp_array[index];
       this.validatePosition();
-      await this.delay(1500);
       this.playerOptions.push(this.cursorOfCells);
+      await this.delay(1250);
     }
   }
 
   validatePosition() {
     if (this.obstaclesGame.includes(this.cursorOfCells)) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Has caido en una trampa, Perdiste :(',
-      });
+      this.swalErrorMessage('Has caido en una trampa');
       this.calification.push(0);
       this.level_counter += 1;
       if (this.level_counter > 5) {
@@ -81,18 +73,37 @@ export class GameInterfaceComponent implements OnInit {
       }
       this.setLevels();
     } else if (this.cursorOfCells == this.goal) {
-      Swal.fire({
-        icon: 'success',
-        title: 'Muy Bien',
-        text: 'Has pasado al siguiente nivel',
-      });
+      this.swalSuccessMessage();
       this.calification.push(1);
       this.level_counter += 1;
       if (this.level_counter > 5) {
-        this.router.navigate(['/survey']);
+        const queryParams: any = {};
+        queryParams.myArray = JSON.stringify(this.calification);
+        const navigationExtras: NavigationExtras = {
+          queryParams
+        };
+        this.router.navigate(['/survey'], navigationExtras);
       }
       this.setLevels();
+    } else if (this.cursorOfCells == this.temp_array[this.temp_array.length - 1] && this.cursorOfCells != this.goal) {
+      this.swalErrorMessage('No has llegado a la meta');
     }
+  }
+
+  swalErrorMessage(textMessage: string) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: textMessage,
+    });
+  }
+
+  swalSuccessMessage() {
+    Swal.fire({
+      icon: 'success',
+      title: 'Muy Bien',
+      text: 'Has pasado al siguiente nivel',
+    });
   }
 
   delay(ms: number) {
@@ -124,22 +135,6 @@ export class GameInterfaceComponent implements OnInit {
 
   undoMovement() {
     this.arrowsPlayerArray.pop();
-  }
-
-  async modal_welcome() {
-    const { value: formValues } = await Swal.fire({
-      title: 'Ingrese su nombre',
-      html:
-        '<input id="swal-input1" class="swal2-input">',
-      focusConfirm: false,
-      preConfirm: () => {
-        "cualquier cosa"
-      }
-    })
-
-    if (formValues) {
-      Swal.fire(JSON.stringify(formValues))
-    }
   }
 
   setLevels() {
