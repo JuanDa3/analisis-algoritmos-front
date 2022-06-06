@@ -73,7 +73,7 @@ export class GameInterfaceComponent implements OnInit {
       }
       this.setLevels();
     } else if (this.cursorOfCells == this.goal) {
-      this.swalSuccessMessage();
+      this.swalSuccessMessage('Has pasado al siguiente nivel');
       this.calification.push(1);
       this.level_counter += 1;
       if (this.level_counter > 5) {
@@ -87,6 +87,17 @@ export class GameInterfaceComponent implements OnInit {
       this.setLevels();
     } else if (this.cursorOfCells == this.temp_array[this.temp_array.length - 1] && this.cursorOfCells != this.goal) {
       this.swalErrorMessage('No has llegado a la meta');
+      this.calification.push(0);
+      this.level_counter += 1;
+      if (this.level_counter > 5) {
+        const queryParams: any = {};
+        queryParams.myArray = JSON.stringify(this.calification);
+        const navigationExtras: NavigationExtras = {
+          queryParams
+        };
+        this.router.navigate(['/survey'], navigationExtras);
+      }
+      this.setLevels();
     }
   }
 
@@ -98,11 +109,11 @@ export class GameInterfaceComponent implements OnInit {
     });
   }
 
-  swalSuccessMessage() {
+  swalSuccessMessage(textMessage: string) {
     Swal.fire({
       icon: 'success',
       title: 'Muy Bien',
-      text: 'Has pasado al siguiente nivel',
+      text: textMessage,
     });
   }
 
