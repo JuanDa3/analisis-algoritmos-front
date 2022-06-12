@@ -10,6 +10,8 @@ import { FooterComponent } from './components/footer/footer.component';
 import { AdministratorComponent } from './components/administrator/administrator.component';
 import { RouterModule } from '@angular/router';
 import { SurveyComponent } from './components/survey/survey.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -21,10 +23,14 @@ import { SurveyComponent } from './components/survey/survey.component';
     FooterComponent,
     AdministratorComponent,
     SurveyComponent,
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
     RouterModule.forRoot([
       { path: 'game-interface', component: GameInterfaceComponent },
       { path: 'administrator', component: AdministratorComponent },

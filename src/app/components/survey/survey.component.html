@@ -1,93 +1,46 @@
 <p class="text-center mt-5">Su Calificación:</p>
 <div class="m-auto d-flex justify-content-around w-50">
-  <div class="mt-3" *ngFor="let item of arrayOfValues" [ngClass]="{
+  <div class="mt-3" *ngFor="let item of calification" [ngClass]="{
     'fa-regular fa-circle-check': item == 1,
     'fa-solid fa-circle-exclamation': item == 0
   }">
   </div>
 </div>
 <div class="text-center mt-5">
-  <div class="">
-    <p>¿Que tan divertido le parecio el juego?</p>
-    <div class="form-check form-check-inline">
-      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio0" value="option0" />
-      <label class="form-check-label" for="inlineRadio0">0</label>
-    </div>
-    <div class="form-check form-check-inline">
-      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" />
-      <label class="form-check-label" for="inlineRadio1">1</label>
-    </div>
-    <div class="form-check form-check-inline">
-      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" />
-      <label class="form-check-label" for="inlineRadio2">2</label>
-    </div>
-    <div class="form-check form-check-inline">
-      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3" />
-      <label class="form-check-label" for="inlineRadio3">3</label>
-    </div>
-    <div class="form-check form-check-inline">
-      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio4" value="option4" />
-      <label class="form-check-label" for="inlineRadio4">4</label>
-    </div>
-    <div class="form-check form-check-inline">
-      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio5" value="option5" />
-      <label class="form-check-label" for="inlineRadio5">5</label>
+
+  <div>
+    <p>¿Que tanto recomendaria el juego?</p>
+    <div class="d-flex justify-content-center">
+      <div *ngFor="let i of optionsSurvey">
+        <div (click)="getListQuestionValues1(i)" class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio{{i}}" value={{i}} />
+          <label class="form-check-label" for="inlineRadio{{i}}">{{i}}</label>
+        </div>
+      </div>
     </div>
   </div>
 
   <div>
-    <p>¿Que tan dificil le parecio el juego?</p>
-    <div class="form-check form-check-inline">
-      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio0" value="option0" />
-      <label class="form-check-label" for="inlineRadio0">0</label>
-    </div>
-    <div class="form-check form-check-inline">
-      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" />
-      <label class="form-check-label" for="inlineRadio1">1</label>
-    </div>
-    <div class="form-check form-check-inline">
-      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" />
-      <label class="form-check-label" for="inlineRadio2">2</label>
-    </div>
-    <div class="form-check form-check-inline">
-      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3" />
-      <label class="form-check-label" for="inlineRadio3">3</label>
-    </div>
-    <div class="form-check form-check-inline">
-      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio4" value="option4" />
-      <label class="form-check-label" for="inlineRadio4">4</label>
-    </div>
-    <div class="form-check form-check-inline">
-      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio5" value="option5" />
-      <label class="form-check-label" for="inlineRadio5">5</label>
+    <p>¿Que tan dificil le parecio el juego?'</p>
+    <div class="d-flex justify-content-center">
+      <div *ngFor="let i of optionsSurvey">
+        <div (click)="getListQuestionValues2(i)" class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio{{i}}" value={{i}} />
+          <label class="form-check-label" for="inlineRadio{{i}}">{{i}}</label>
+        </div>
+      </div>
     </div>
   </div>
 
   <div>
     <p>¿Que tanto recomendaria el juego?</p>
-    <div class="form-check form-check-inline">
-      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio0" value="option0" />
-      <label class="form-check-label" for="inlineRadio0">0</label>
-    </div>
-    <div class="form-check form-check-inline">
-      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" />
-      <label class="form-check-label" for="inlineRadio1">1</label>
-    </div>
-    <div class="form-check form-check-inline">
-      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" />
-      <label class="form-check-label" for="inlineRadio2">2</label>
-    </div>
-    <div class="form-check form-check-inline">
-      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3" />
-      <label class="form-check-label" for="inlineRadio3">3</label>
-    </div>
-    <div class="form-check form-check-inline">
-      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio4" value="option4" />
-      <label class="form-check-label" for="inlineRadio4">4</label>
-    </div>
-    <div class="form-check form-check-inline">
-      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio5" value="option5" />
-      <label class="form-check-label" for="inlineRadio5">5</label>
+    <div class="d-flex justify-content-center">
+      <div *ngFor="let i of optionsSurvey">
+        <div (click)="getListQuestionValues3(i)" class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio{{i}}" value={{i}} />
+          <label class="form-check-label" for="inlineRadio{{i}}">{{i}}</label>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -95,9 +48,15 @@
 <div class="containter mt-5">
   <div class=" input-group w-50 m-auto">
     <span class="input-group-text">Nombre</span>
-    <input type="text" aria-label="First name" class="form-control">
+    <input #personName type="text" aria-label="First name" class="form-control">
   </div>
   <div class="m-auto d-flex justify-content-center mt-3">
-    <button class="" type="button" class="btn btn-success">Enviar Datos</button>
+    <button (click)="sendData(personName.value)" class="" type="submit" class="btn btn-success">Enviar Datos</button>
   </div>
 </div>
+
+<!-- <form [formGroup]="form">
+  <input (click)="getListQuestionValues()" type="radio" formControlName="food" value="beef"> Beef
+  <input (click)="getListQuestionValues()" type="radio" formControlName="food" value="lamb"> Lamb
+  <input (click)="getListQuestionValues()" type="radio" formControlName="food" value="fish"> Fish
+</form> -->
