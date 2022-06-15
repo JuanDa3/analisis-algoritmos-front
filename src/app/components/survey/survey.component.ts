@@ -37,7 +37,7 @@ export class SurveyComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.calification);
+
   }
 
   async modal_welcome() {
@@ -62,17 +62,14 @@ export class SurveyComponent implements OnInit {
 
   getListQuestionValues1(option: any): void {
     this.question1 = option;
-    console.log(this.question1);
   }
 
   getListQuestionValues2(option: any): void {
     this.question2 = option;
-    console.log(this.question2);
   }
 
   getListQuestionValues3(option: any): void {
     this.question2 = option;
-    console.log(this.question3);
   }
 
   sendData(personName: string): void {
@@ -84,7 +81,7 @@ export class SurveyComponent implements OnInit {
       Swal.fire({
         position: 'top-end',
         icon: 'success',
-        title: 'Your work has been saved',
+        title: data.mensaje,
         showConfirmButton: false,
         timer: 3500
       })

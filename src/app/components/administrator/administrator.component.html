@@ -1,1 +1,47 @@
-<p>administrator works!</p>
+<div class="container d-flex justify-content-around text-center">
+  <div>
+    <p>Promedio global de cada pregunta del test:</p>
+    <div *ngFor="let calificacionGlobal of promedioGlobalPregunta">
+      <div class="d-flex">
+        <p>{{calificacionGlobal[0]}}</p>
+        <p>{{calificacionGlobal[1]*100}}%</p>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <p>Listado ordenado de los estudiantes (mayor a menor) con base en la nota del test:</p>
+    <div *ngFor=" let listadoPersonas of listadoPersonasTest">
+      {{listadoPersonas}}
+    </div>
+  </div>
+</div>
+
+<p class="mt-5 text-center">Número de respuestas correctas e incorrectas por pregunta de todos los estudiantes:</p>
+<div class="container d-flex justify-content-around text-center">
+  <div>
+    <p>Respuestas Correctas</p>
+    <div *ngFor="let calificacionGlobal of promedioGlobalPregunta">
+      {{calificacionGlobal}}
+    </div>
+  </div>
+
+  <div>
+    <p>Respuestas Incorrectas</p>
+    <div *ngFor="let respuestasIncorrectas of preguntasIncorrectasTest">
+      {{respuestasIncorrectas}}
+    </div>
+  </div>
+</div>
+
+<div class="mt-5 text-center">
+  <p>promedio de cada una de las respuestas de opinión de los estudiantes:</p>
+  <div *ngFor="let listadoFormulario of promedioFormulario">
+    {{listadoFormulario}}
+  </div>
+</div>
+
+<div class="mt-5 text-center">
+  <p>Coeficiente de Correlación:</p>
+  <p>{{coeficienteCorrelacion}}</p>
+</div>

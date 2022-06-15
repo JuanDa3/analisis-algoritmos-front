@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AdministratorService } from './administrator.service';
 
 @Component({
   selector: 'app-administrator',
@@ -7,10 +8,32 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdministratorComponent implements OnInit {
 
-  constructor() { }
+  promedioGlobalPregunta: any[] = [];
+  preguntasCorrectasTest: any[] = [];
+  preguntasIncorrectasTest: any[] = [];
+  listadoPersonasTest: any[] = [];
+  promedioFormulario: any[] = [];
+  coeficienteCorrelacion: number = 0;
+  x: number = 0;
+  y: number = 0;
+
+  constructor(private administrationService: AdministratorService) { }
 
   ngOnInit(): void {
-    console.log("me llamaron?");
+    this.administrationService.getPromedioGlobalPregunta()
+      .subscribe(data => (this.promedioGlobalPregunta = data));
+
+    this.administrationService.getPreguntasCorrectas()
+      .subscribe(data => (this.preguntasCorrectasTest = data));
+
+    this.administrationService.getPreguntasIncorrectas()
+      .subscribe(data => (this.preguntasIncorrectasTest = data));
+
+    this.administrationService.getListadoPersonasTest()
+      .subscribe(data => (this.listadoPersonasTest = data));
+
+    this.administrationService.getCoeficiente()
+      .subscribe(data => (this.coeficienteCorrelacion = data));
   }
 
 }
