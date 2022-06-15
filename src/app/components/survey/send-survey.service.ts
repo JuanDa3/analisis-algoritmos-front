@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class SendSurveyService {
 
-  urlBack = 'http://localhost:8080/api/cliente';
+  urlBack = 'https://analisis-algoritmos.herokuapp.com/api/cliente';
 
   constructor(private http: HttpClient) { }
 

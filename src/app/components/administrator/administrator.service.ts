@@ -7,8 +7,9 @@ import { Observable } from 'rxjs';
 })
 export class AdministratorService {
 
-  urlTest: string = 'http://localhost:8080/api/preguntatestcontroller/';
-  urlFormulario: string = 'http://localhost:8080/api/formulario';
+  //urlTest: string = 'http://localhost:8080/api/preguntatestcontroller/';
+  urlTest: string = 'https://analisis-algoritmos.herokuapp.com/api/preguntatestcontroller/';
+  urlFormulario: string = 'https://analisis-algoritmos.herokuapp.com/api/formulario';
 
   constructor(private http: HttpClient) { }
 
@@ -33,6 +34,6 @@ export class AdministratorService {
   }
 
   getCoeficiente(): Observable<any> {
-    return this.http.get<any>('http://localhost:8080/api/cliente/coeficiente');
+    return this.http.get<any>('https://analisis-algoritmos.herokuapp.com/api/cliente/coeficiente');
   }
 }
